@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact us</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/respensive.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="assets/js/main.js" defer></script>
+  </head>
+  <body>
+    <div id="header"></div>
+
+    <main class="cuMain">
+      <div class="mainContainer productsContainer">
+        <div class="imgContainer">
+          <img class="bgImg" src="assets/images/cu-bg.png" alt="home-bg" />
+        </div>
+      </div>
+
+      <div id="app" class="productsWrapper">
+        <h2 class="secTitle secTitleProduct">Contact us</h2>
+        <p class="dicorateEl">*****</p>
+
+        <table v-if="cart.length" class="table">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item in cart" :key="item.id">
+              <td>
+                <img :src="item.image" :alt="item.title" class="table_image" />
+              </td>
+              <td>{{ item.title }}</td>
+              <td>{{ item.short_text }}</td>
+              <td>
+                <button @click="removeFromCart(item.id)" class="table_button">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <form class="cuForm" ref="contactForm" @submit.prevent="makeOrder">
+          <div class="cuFormColumnFirst">
+            <label class="cuFormLabel">
+              <span class="cuLabelContent"> Name * </span>
+              <input class="cuFormInput" type="text" ref="name" required />
+            </label>
+            <label class="cuFormLabel">
+              <span class="cuLabelContent"> Company Name </span>
+              <input class="cuFormInput" type="text" ref="companyName" />
+            </label>
+            <label class="cuFormLabel">
+              <span class="cuLabelContent"> Position </span>
+              <input class="cuFormInput" type="text" ref="position" />
+            </label>
+            <label class="cuFormLabel">
+              <span class="cuLabelContent"> City </span>
+              <input class="cuFormInput" type="text" ref="city" />
+            </label>
+            <label class="cuFormLabel">
+              <span class="cuLabelContent"> Country </span>
+              <input class="cuFormInput" type="text" ref="country" />
+            </label>
+            <label class="cuFormLabel">
+              <span class="cuLabelContent"> Telephone </span>
+              <input class="cuFormInput" type="tel" ref="phone" />
+            </label>
+            <label class="cuFormLabel">
+              <span class="cuLabelContent"> Email * </span>
+              <input class="cuFormInput" type="email" ref="email" required />
+            </label>
+          </div>
+
+          <div class="cuFormColumnSecond">
+            <label class="cuFormLabel">
+              <span class="cuLabelContent"> You are a </span>
+              <select class="cuFormInput cuFormSelect" ref="youAre">
+                <option value="seedProducer">Seed producer</option>
+                <option value="seedSeller">Seed seller</option>
+                <option value="seedMarketer">Seed marketer</option>
+              </select>
+              <img
+                class="selectBtn"
+                src="assets/images/arrow-icon.svg"
+                alt=""
+              />
+            </label>
+            <label class="cuFormLabel">
+              <span class="cuLabelContent"> If other, please specify </span>
+              <input class="cuFormInput" type="text" ref="other" />
+            </label>
+            <label class="cuFormLabel">
+              <span class="cuLabelContent"> You are interested in </span>
+              <textarea class="cuFormTextarea" ref="interest"></textarea>
+            </label>
+
+            <label class="cuFormLabel">
+              <span class="cuLabelContent"> Please type this code </span>
+              <div class="cuCodeWrapper">
+                <input class="cuFormInput" type="text" ref="captcha" />
+                <button class="cuFormBtn" type="submit">Send Message</button>
+              </div>
+            </label>
+          </div>
+        </form>
+
+        <div v-if="orderSummary" class="order-summary">
+          <h3>Order Summary</h3>
+
+          <p><strong>Name:</strong> {{ orderSummary.name }}</p>
+          <p><strong>Email:</strong> {{ orderSummary.email }}</p>
+          <p>
+            <strong>Company:</strong> {{ orderSummary.companyName || 'N/A' }}
+          </p>
+          <p><strong>Position:</strong> {{ orderSummary.position || 'N/A' }}</p>
+          <p><strong>City:</strong> {{ orderSummary.city || 'N/A' }}</p>
+          <p><strong>Country:</strong> {{ orderSummary.country || 'N/A' }}</p>
+          <p><strong>Phone:</strong> {{ orderSummary.phone || 'N/A' }}</p>
+          <p><strong>You are a:</strong> {{ orderSummary.youAre }}</p>
+          <p><strong>Other:</strong> {{ orderSummary.other || 'N/A' }}</p>
+          <p><strong>Interest:</strong> {{ orderSummary.interest || 'N/A' }}</p>
+
+          <h3>Ordered Products</h3>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in orderProducts" :key="item.id">
+                <td>
+                  <img
+                    :src="item.image"
+                    :alt="item.title"
+                    class="table_image"
+                  />
+                </td>
+                <td>{{ item.title }}</td>
+                <td>{{ item.short_text }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <section class="cuContactInfo">
+      <h3 class="seedTitle">Our Address</h3>
+      <p class="cuContactParagraf">AGRIDERA Seeds & Agriculture Ltd.</p>
+      <p>P.O Box 103,</p>
+      <p>Gedera 70750, Israel.</p>
+      <p>
+        Telephone: <a class="cuTel" href="tel:+97289449222">+972 8 944 9222</a>
+      </p>
+    </section>
+
+    <div id="footer"></div>
+  </body>
+</html>

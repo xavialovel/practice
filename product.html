@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tomato one</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="assets/css/respensive.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="assets/js/main.js" defer></script>
+  </head>
+  <body>
+    <div id="header"></div>
+
+    <main class="toMain">
+      <div class="toWrapper">
+        <a class="toLinkBack" href="/products.html">
+          <i class="fa-solid fa-arrow-left"></i> Return to all grapes
+        </a>
+
+        <div class="toContainer" id="app" v-if="product">
+          <div class="toCardInfo">
+            <div class="toTomatoInfo">
+              <h2 class="secTitle">{{ product.title }}</h2>
+              <h3 class="toSubtitle">{{ product.short_text }}</h3>
+              <p class="dicorateEl toDicorateEl">*****</p>
+
+              <div class="toIconContainer">
+                <img
+                  class="toIcon"
+                  src="assets/images/to-icon.png"
+                  alt="toIcon"
+                />
+                <p class="toIconDescrip">{{ product.desc }}</p>
+              </div>
+            </div>
+            <div>
+              <img
+                class="toTomatoImg"
+                :src="product.image"
+                :alt="product.title"
+              />
+            </div>
+          </div>
+
+          <div class="characteristics">
+            <div class="toFirstColumn">
+              <h2 class="toTitle">CHARACTERISTICS</h2>
+
+              <h3 class="toResistance">Resistance</h3>
+              <p class="toDesc">{{ product.characteristics.resistance }}</p>
+
+              <h3 class="toGreenTitle">Plant</h3>
+              <ul class="toUl">
+                <li
+                  class="toLi"
+                  v-for="item in product.characteristics.plant"
+                  :key="item"
+                >
+                  {{ item }}
+                </li>
+              </ul>
+
+              <h3 class="toGreenTitle">Fruit</h3>
+              <ul class="toUl">
+                <li
+                  class="toLi"
+                  v-for="item in product.characteristics.fruit"
+                  :key="item"
+                >
+                  {{ item }}
+                </li>
+              </ul>
+            </div>
+
+            <div class="toSecondColumn">
+              <h3 class="toGreenTitle cycle">Cycle</h3>
+              <ul class="toUl">
+                <li
+                  class="toLi"
+                  v-for="item in product.characteristics.cycle"
+                  :key="item"
+                >
+                  {{ item }}
+                </li>
+              </ul>
+
+              <h3 class="toGreenTitle">Color</h3>
+              <p class="toLi">{{ product.characteristics.color }}</p>
+            </div>
+
+            <a class="toPdf" href="#" @click.prevent="addToCartAndGo">
+              <i class="fa-solid fa-cart-plus"></i> Add to Cart
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div id="footer"></div>
+  </body>
+</html>

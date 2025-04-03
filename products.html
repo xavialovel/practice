@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/respensive.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="assets/js/main.js" defer></script>
+  </head>
+  <body>
+    <div id="header"></div>
+
+    <main class="main">
+      <div class="mainContainer productsContainer">
+        <div class="imgContainer">
+          <img
+            class="bgImg"
+            src="assets/images/products-onion.webp"
+            alt="onion-bg"
+          />
+        </div>
+      </div>
+
+      <div class="productsWrapper">
+        <h2 class="secTitle secTitleProduct">Onion Agridera Fresh Market</h2>
+        <p class="dicorateEl">*****</p>
+
+        <p class="paragraf">
+          Agridera strives to be one of the world's leading companies in the selection, production and sale of onion seeds.
+          <span class="boldText">
+            We invest intensively in research and development to provide
+            solutions to growers and consumers in numerous countries around the
+            world.</span
+          >
+          In particular, we breed improved disease-resistant cultivars adapted
+          to different markets globally.
+        </p>
+        <p class="paragraf">
+          Currently, the main focus is on combining resistance to onion yellow dwarf virus (OYDV) and onion mosaic virus (OMV) with resistance to fusarium wilt and pink root rot in high-yielding onion lines and hybrids. In parallel, intensive work is underway to create varieties that are tolerant to a complex of soil pathogens, including Stemphylium vesicarium - the causative agent of stemphylium leaf spot.
+        </p>
+        <p class="paragraf">
+          In terms of horticultural traits, breeding is for earliness, different bulb sizes, firmness, red/white/yellow bulb color, pungency, bolting resistance, shelf life, and high/low temperature bulb formation. Combinations of quality features and disease resistance are sought in a variety of types, namely round, flattened and elongated shapes.
+        </p>
+        <p class="paragrafLeftBorder">
+          Agridera Onion breeding programs are focusing on three main segments:
+Greenhouse Bunching Onions, Open-field Bulb Onions, and Short-day Storage Onions.
+        </p>
+
+        <div class="tomatInfoContainer">
+          <div class="tomatInfoItem">
+            <h3 class="tomatInfoTitle">Greenhouse Onion Breeding Program</h3>
+            <p class="tomatInfo">
+              <span class="boldText"
+                >This breeding is aimed for the Spanish and Turkish markets.
+              </span>
+              For single and cluster harvesting, round bulb shape and resistances to OYDV (Onion Yellow Dwarf Virus), IYSV (Iris Yellow Spot Virus), Nematodes and Fusarium Basal Rot (Fusarium oxysporum f.sp. cepae). Some hybrids may include additional resistances, such as Purple Blotch (Alternaria porri) and Downy Mildew (Peronospora destructor).
+            </p>
+          </div>
+
+          <div class="tomatInfoItem">
+            <h3 class="tomatInfoTitle">Open-field Indeterminate Onions</h3>
+            <p class="tomatInfo">
+              <span class="boldText"
+                >This breeding is for Brazilian, Moroccan, and Turkish markets.
+              </span>
+              The main focus is on large round shape bulbs (200 grams plus); and resistances to OYDV, IYSV, Nematodes and Fusarium Basal Rot. In the near future, Fusarium oxysporum f.sp. cepae (FOC) will be included as basic resistance in our cultivars.
+            </p>
+          </div>
+
+          <div class="tomatInfoItem">
+            <h3 class="tomatInfoTitle">Open-field Bunching Type Onions</h3>
+            <p class="tomatInfo">
+              <span class="boldText"
+                >This breeding is for Mediterranean markets.
+              </span>
+              We breed round and elongated shapes, standard sizes (140-180 grams), and beef sizes (min. 180 grams up to 300 grams and more). We combine the resistances of OYDV, IYSV and Nematodes as basic resistances in our hybrids. However, some hybrids may include more resistances, such as Purple Blotch and Downy Mildew (P. destructor).
+            </p>
+          </div>
+        </div>
+
+        <p class="paragrafLeftBorder boldParagraf">
+          Agridera operates through international and local distributers around
+          the world.
+        </p>
+
+        <div class="cardsWrapper" id="app">
+          <div class="card" v-for="product in products" :key="product.id">
+            <a
+              class="cardImgLink"
+              :href="'product.html'"
+              @click="addItem(product.id)"
+            >
+              <img class="cardImg" :src="product.image" :alt="product.title" />
+            </a>
+            <div class="cardInfo">
+              <a
+                class="cardLink"
+                :href="'product.html'"
+                @click="addItem(product.id)"
+              >
+                <h3>{{ product.title }}</h3>
+              </a>
+              <p class="cardParagraf">{{ product.short_text }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div id="footer"></div>
+  </body>
+</html>
